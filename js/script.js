@@ -9,7 +9,10 @@ window.addEventListener("load", ()=>{
         constructor(game){
             this.game = game;
             window.addEventListener("keydown", e => {
-                if ((e.key === "ArrowUp") && (this.game.keys.indexof(e.key) === -1)){
+                if ((
+                    (e.key === "ArrowUp") || (e.key === "ArrowDown"))
+                &&
+                    this.game.keys.indexof(e.key) === -1){
                     this.game.keys.push(e.key);
                 }
             })
@@ -38,8 +41,16 @@ window.addEventListener("load", ()=>{
             this.x = 20;
             this.y = 100;
             this.speedY = 0
+            this.maxSpeed = 2;
         }
         update(){
+            if (this.game.keys.includes("ArrowUp")){
+                this.speedY = -this.maxSpeed;
+            } else if (this.game.keys.includes("ArrowDown")){
+                this.speedY = this.maxSpeed;
+            } else {
+                this.speedY = 0;
+            }
             this.y += this.speedY;
         }
         draw(context){

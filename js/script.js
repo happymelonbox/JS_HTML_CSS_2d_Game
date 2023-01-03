@@ -24,8 +24,24 @@ window.addEventListener("load", ()=>{
         }
     };
     class Projectile {
-        constructor(){
-
+        constructor(game, x, y){
+            this.game = game;
+            this.x = x;
+            this.y = y;
+            this.width = 10;
+            this.height = 3;
+            this.speed = 3;
+            this.markedForDeletion = false
+        }
+        update(){
+            this.x += this.speed;
+            if (this.x > this.game.width * 0.8){
+                this.markedForDeletion = true;
+            }
+        }
+        draw(context){
+            context.fillStyle = "yellow"
+            fillRect(this.x, this.y, this.width, this.height)
         }
     };
     class Particle {
@@ -40,8 +56,9 @@ window.addEventListener("load", ()=>{
             this.height = 190;
             this.x = 20;
             this.y = 100;
-            this.speedY = 0
+            this.speedY = 0;
             this.maxSpeed = 2;
+            this.projectiles = [];
         }
         update(){
             if (this.game.keys.includes("ArrowUp")){
@@ -54,7 +71,11 @@ window.addEventListener("load", ()=>{
             this.y += this.speedY;
         }
         draw(context){
+            context.fillStyle = "black"
             context.fillRect(this.x, this.y, this.width, this.height);
+        }
+        shootTop(){
+            this.projectiles.push(new Projectile(this.game, this.x, this.y))
         }
     };
     class Enemy {

@@ -6,8 +6,18 @@ window.addEventListener("load", ()=>{
     canvas.height = 500;
 
     class InputHandler {
-        constructor(){
-
+        constructor(game){
+            this.game = game;
+            window.addEventListener("keydown", e => {
+                if ((e.key === "ArrowUp") && (this.game.keys.indexof(e.key) === -1)){
+                    this.game.keys.push(e.key);
+                }
+            })
+            window.addEventListener("keyup", e => {
+                if (this.game.keys.indexof(e.key) > -1){
+                    this.game.keys.splice(this.game.keys.indexof(e.key), 1);
+                }
+            })
         }
     };
     class Projectile {
@@ -61,6 +71,8 @@ window.addEventListener("load", ()=>{
             this.width = width;
             this.height = height;
             this.player = new Player(this);
+            this.input = new InputHandler(this);
+            this.keys = [];
         }
 
         update(){
@@ -71,4 +83,14 @@ window.addEventListener("load", ()=>{
             this.player.draw(context);
         }
     };
+
+    const game = new Game(canvas.width, canvas.height);
+
+    //animation loop
+    function animate(){
+        game.update();
+        game.draw(ctx);
+        requestAnimationFrame(animate);
+    }
+    animate();
 })

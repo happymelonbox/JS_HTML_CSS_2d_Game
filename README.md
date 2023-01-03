@@ -1,1 +1,1 @@
-# JS_HTML_CSS_2d_Game
+# 2D Game using JS, HTML and CSS

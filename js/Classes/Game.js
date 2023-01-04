@@ -1,3 +1,9 @@
+import Player from "./Player.js";
+import InputHandler from "./InputHandler.js";
+import UI from "./UI.js";
+import Angler1 from "./enemies/Angler1.js";
+
+
 class Game {
         constructor(width, height){
             this.width = width;

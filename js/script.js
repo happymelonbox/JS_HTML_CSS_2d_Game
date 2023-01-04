@@ -182,6 +182,19 @@ window.addEventListener("load", ()=>{
             }
             this.enemies.forEach(enemy => {
                 enemy.update();
+                if (this.checkCollision(this.player, enemy)){
+                    enemy.markedForDeletion = true;
+                }
+                this.player.projectiles.forEach(projectile => {
+                    if (this.checkCollision(projectile, enemy)){
+                        enemy.lives--;
+                        projectile.markedForDeletion = true;
+                        if (enemy.lives <= 0){
+                            enemy.markedForDeletion = true;
+                            this.score++
+                        }
+                    }
+                })
             });
             this.enemies.filter(enemy => !enemy.markedForDeletion);
             if (this.enemyTimer > this.enemyInterval && !this.gameOver){

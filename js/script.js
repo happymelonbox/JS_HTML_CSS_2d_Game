@@ -1,3 +1,5 @@
+import Game from "./Classes/Game.js"
+
 window.addEventListener("load", ()=>{
     //canvas setup
     const canvas = document.getElementById("canvas1");

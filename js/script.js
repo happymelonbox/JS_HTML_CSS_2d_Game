@@ -102,6 +102,8 @@ window.addEventListener("load", ()=>{
             this.x = this.game.width;
             this.speedX = Math.random() * -1.5 - 0.5;
             this.markedForDeletion = false;
+            this.lives = 5;
+            this.score = this.lives;
         }
         update(){
             this.x += this.speedX;
@@ -112,6 +114,9 @@ window.addEventListener("load", ()=>{
         draw(context){
             context.fillStyle = "red";
             context.fillRect(this.x, this.y, this.width, this.height);
+            context.fillStyle = "black";
+            context.font = "20px Helvetica";
+            context.fillText(this.lives, this.x, this.y);
         }
     }
 
@@ -141,11 +146,14 @@ window.addEventListener("load", ()=>{
             this.game = game;
             this.fontsize = 25;
             this.fontFamily = "Helvetica";
-            this.color = "yellow";
+            this.color = "white";
         }
         draw(context){
-            //ammo
             context.fillStyle = this.color;
+            context.font = this.fontsize + "px" + this.fontFamily;
+            //score
+            context.fillText(this.game.score, 20, 40);
+            //ammo
             for (let i = 0; i < this.game.ammo; i++){
                 context.fillRect(20 + 5 * i, 50, 3, 20);
             }
@@ -168,6 +176,8 @@ window.addEventListener("load", ()=>{
             this.ammoTimer = 0;
             this.ammoInterval = 500;
             this.gameOver = false;
+            this.score = 0;
+            this.winningScore = 10;
         }
 
         update(deltaTime){
@@ -191,12 +201,13 @@ window.addEventListener("load", ()=>{
                         projectile.markedForDeletion = true;
                         if (enemy.lives <= 0){
                             enemy.markedForDeletion = true;
-                            this.score++
+                            this.score += enemy.score;
+                            if (this.score > this.winningScore) this.gameOver = true;
                         }
                     }
                 })
             });
-            this.enemies.filter(enemy => !enemy.markedForDeletion);
+            this.enemies = this.enemies.filter(enemy => !enemy.markedForDeletion);
             if (this.enemyTimer > this.enemyInterval && !this.gameOver){
                 this.addEnemy();
                 this.enemyTimer = 0;

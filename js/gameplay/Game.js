@@ -1,7 +1,7 @@
 import Player from "./Player.js";
 import InputHandler from "./InputHandler.js";
-import UI from "./UI.js";
-import Angler1 from "./enemies/Angler1.js";
+import UI from "../classes/ui/UI.js";
+import Angler1 from "../enemies/Angler1.js";
 
 
 class Game {

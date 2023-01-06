@@ -12,7 +12,7 @@ class Enemy {
     }
 
     update(){
-        this.x += this.speedX;
+        this.x += this.speedX - this.game.speed;
         if (this.x + this.width < 0){
             this.markedForDeletion = true;
         }

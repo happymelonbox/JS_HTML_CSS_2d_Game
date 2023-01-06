@@ -10,7 +10,7 @@ class Projectile {
     }
     update(){
         this.x += this.speed;
-        if (this.x > this.game.width * 0.8){
+        if (this.x > this.game.width * 0.9){
             this.markedForDeletion = true;
         }
     }

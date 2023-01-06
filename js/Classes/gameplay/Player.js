@@ -14,7 +14,7 @@ class Player {
     update(){
             if (this.game.keys.includes("ArrowUp") && this.y > 0){
                 this.speedY = -this.maxSpeed;
-            } else if (this.game.keys.includes("ArrowDown") && this.y < (499 - this.height)){
+            } else if (this.game.keys.includes("ArrowDown") && this.y < (500 - (this.height * 0.1))){
                 this.speedY = this.maxSpeed;
             } else {
                 this.speedY = 0;

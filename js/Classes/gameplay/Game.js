@@ -27,6 +27,7 @@ class Game {
             this.gameTime = 0;
             this.timeLimit = 30000;
             this.speed = 1;
+            this.debug = true;
         }
 
         update(deltaTime){
@@ -37,6 +38,7 @@ class Game {
                 this.gameOver = true;
             };
             this.background.update();
+            this.background.layer4.update();
             this.player.update();
             if(this.ammoTimer > this.ammoInterval){
                 if (this.ammo < this.maxAmmo){
@@ -81,6 +83,7 @@ class Game {
             this.enemies.forEach(enemy => {
                 enemy.draw(context);
             });
+            this.background.layer4.draw(context);
         }
 
         addEnemy(){

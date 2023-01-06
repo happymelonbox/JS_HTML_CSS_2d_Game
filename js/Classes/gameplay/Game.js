@@ -3,6 +3,8 @@ import InputHandler from "./InputHandler.js";
 import UI from "../ui/UI.js";
 import Angler1 from "../enemies/Angler1.js";
 import Background from "../ui/Background.js";
+import Angler2 from "../enemies/Angler2.js";
+import Lucky from "../enemies/Lucky.js";
 
 
 class Game {
@@ -59,7 +61,7 @@ class Game {
                         projectile.markedForDeletion = true;
                         if (enemy.lives <= 0){
                             enemy.markedForDeletion = true;
-                            if (!this.gameOver){ 
+                            if (!this.gameOver){
                                 this.score += enemy.score;
                             }
                             if (this.score > this.winningScore) this.gameOver = true;
@@ -87,9 +89,16 @@ class Game {
         }
 
         addEnemy(){
-            this.enemies.push(new Angler1(this))
+            const randomize = Math.random();
+            if (randomize < 0.5){
+                this.enemies.push(new Angler1(this));
+            } else if (randomize < 0.6){
+                this.enemies.push(new Angler2(this));
+            } else {
+                this.enemies.push(new Lucky(this));
+            }
         }
-        
+
         checkCollision(rect1, rect2){
             return (
                 // if left side of rect1 is to the left of right side of rect2

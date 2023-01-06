@@ -5,6 +5,8 @@ class Angler2 extends Enemy{
         super(game);
         this.width = 213;
         this.height = 165;
+        this.lives = 2;
+        this.score = this.lives;
         this.y = Math.random() * (this.game.height * 0.9 - this.height);
         this.image = document.getElementById("angler2");
         this.frameY = Math.floor(Math.random() * 2);

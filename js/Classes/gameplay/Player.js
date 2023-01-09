@@ -67,7 +67,10 @@ class Player {
         this.projectiles.push(new Projectile(this.game, this.x, this.y));
         this.game.ammo--;
         }
-    };
+    }
+    enterPowerUp(){
+
+    }
 };
 
 export default Player;

@@ -14,8 +14,11 @@ class Player {
         this.maxSpeed = 2;
         this.projectiles = [];
         this.image = document.getElementById("player");
+        this.powerUp = false;
+        this.powerUpTimer = 0;
+        this.powerUpLimit = 10000;
     }
-    update(){
+    update(deltaTime){
             if (this.game.keys.includes("ArrowUp") && this.y > 0){
                 this.speedY = -this.maxSpeed;
             } else if (this.game.keys.includes("ArrowDown") && this.y < (500 - (this.height * 0.1))){
@@ -35,6 +38,19 @@ class Player {
             this.frameX++;
         } else {
             this.frameX = 0;
+        }
+
+        //power up
+        if (this.powerUp){
+            if (this.powerUpTimer > this.powerUpLimit){
+                this.powerUpTimer = 0;
+                this.powerUp = false;
+                this.frameY = 0;
+            } else {
+                this.powerUpTimer += deltaTime;
+                this.frameY = 1;
+                this.game.ammo += 0.1
+            }
         }
     }
     draw(context){
